@@ -4,12 +4,12 @@ import pandas as pd
 from PIL import Image
 
 
-im = Image.open("employee_churn.jfif")
+im = Image.open("/Users/sukiwang/Documents/GitHub/HR-Analytics-Employee-Attrition-with-Streamlit-Deployment/employee_churn.jfif")
 st.image(im, width=700)
 
-model = pickle.load(open("final_rf_model", "rb"))
-scale = pickle.load(open("mm_scaler.pkl", "rb"))
-employee = pd.read_csv('HR_comma_sep.csv')
+model = pickle.load(open("/Users/sukiwang/Documents/GitHub/HR-Analytics-Employee-Attrition-with-Streamlit-Deployment/final_rf_model", "rb"))
+scale = pickle.load(open("/Users/sukiwang/Documents/GitHub/HR-Analytics-Employee-Attrition-with-Streamlit-Deployment/mm_scaler.pkl", "rb"))
+employee = pd.read_csv('/Users/sukiwang/Documents/GitHub/HR-Analytics-Employee-Attrition-with-Streamlit-Deployment/hr_employee_attrition.csv')
 
 st.sidebar.header("Select the Employee Features")
 
