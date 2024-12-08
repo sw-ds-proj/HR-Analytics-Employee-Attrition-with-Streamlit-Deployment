@@ -7,7 +7,7 @@ from PIL import Image
 im = Image.open("/Users/sukiwang/Documents/GitHub/HR-Analytics-Employee-Attrition-with-Streamlit-Deployment/employee_churn.jfif")
 st.image(im, width=700)
 
-model = pickle.load(open("/Users/sukiwang/Documents/GitHub/HR-Analytics-Employee-Attrition-with-Streamlit-Deployment/final_rf_model", "rb"))
+model = pickle.load(open("/Users/sukiwang/Documents/GitHub/HR-Analytics-Employee-Attrition-with-Streamlit-Deployment/rf_model", "rb"))
 scale = pickle.load(open("/Users/sukiwang/Documents/GitHub/HR-Analytics-Employee-Attrition-with-Streamlit-Deployment/mm_scaler.pkl", "rb"))
 employee = pd.read_csv('/Users/sukiwang/Documents/GitHub/HR-Analytics-Employee-Attrition-with-Streamlit-Deployment/hr_employee_attrition.csv')
 
@@ -15,7 +15,7 @@ st.sidebar.header("Select the Employee Features")
 
 satisfaction_level = st.sidebar.slider("Please select the satisfaction level of employee", 1, 100, 50, 5) / 100
 last_evaluation = st.sidebar.slider("Please select the last evaluation level of employee", 1, 100, 50, 5) / 100
-average_monthly_hour = st.sidebar.slider("Please select the number of hours in average an employee work in a week",
+average_montly_hours = st.sidebar.slider("Please select the number of hours in average an employee work in a week",
                                          10, 80, 40, 1) * 4
 time_spend_company = st.sidebar.slider("Please select the number of years an employee work in company", 1, 20, 5, 1)
 project_number = st.sidebar.slider("Please select the number of projects assigned to employee", 0, 15, 5, 1)
@@ -24,9 +24,9 @@ work_accident = st.sidebar.selectbox("Please select whether an employee had an a
 salary_list = ['low', 'medium', 'high']
 salary = st.sidebar.selectbox("Please select salary level of employee", salary_list)
 
-df = pd.DataFrame(data=[[satisfaction_level, last_evaluation, productivity, average_monthly_hour, time_spend_company]],
-                  columns=['satisfaction_level', 'last_evaluation', 'productivity', 'average_monthly_hour',
-                           'time_spend_company'])
+df = pd.DataFrame(data=[[satisfaction_level, last_evaluation, average_montly_hours, time_spend_company,productivity]],
+                  columns=['satisfaction_level', 'last_evaluation', 'average_montly_hours',
+                           'time_spend_company','productivity'])
 
 scaled = scale.transform(df)
 df = pd.DataFrame(scaled, columns=df.columns)
